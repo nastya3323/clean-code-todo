@@ -1,6 +1,7 @@
 import js from '@eslint/js';
 import globals from 'globals';
 import { defineConfig } from 'eslint/config';
+import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
 export default defineConfig([
   {
@@ -15,5 +16,6 @@ export default defineConfig([
       'no-console': 'error',
     },
   },
+  eslintConfigPrettier,
   { files: ['**/*.js'], languageOptions: { sourceType: 'script' } },
 ]);

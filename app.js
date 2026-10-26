@@ -12,40 +12,40 @@ const addButton = document.getElementsByTagName('button')[0]; //first button
 const incompleteTaskHolder = document.getElementById('incomplete-tasks'); //ul of #incompleteTasks
 const completedTasksHolder = document.getElementById('completed-tasks'); //completed-tasks
 
+const createElement = function (tag, className, text) {
+  const element = document.createElement(tag);
+
+  element.className = className;
+
+  if (text) {
+    element.textContent = text;
+  }
+
+  return element;
+};
+
 //New task list item
 const createNewTaskElement = function (taskString) {
-  const listItem = document.createElement('li');
+  const listItem = createElement('li', 'task-item');
 
   //input (checkbox)
-  const checkBox = document.createElement('input'); //checkbx
+  const checkBox = createElement('input', 'task-item__checkbox'); //checkbx
   //label
-  const label = document.createElement('label'); //label
+  const label = createElement('label', 'task-item__label', taskString); //label
   //input (text)
-  const editInput = document.createElement('input'); //text
+  const editInput = createElement('input', 'task-item__input'); //text
   //button.edit
-  const editButton = document.createElement('button'); //edit button
+  const editButton = createElement('button', 'button task-item__button task-item__button--edit', 'Edit'); //edit button
 
   //button.delete
-  const deleteButton = document.createElement('button'); //delete button
-  const deleteButtonImg = document.createElement('img'); //delete button image
-
-  listItem.className = 'task-item';
-
-  label.innerText = taskString;
-  label.className = 'task-item__label';
+  const deleteButton = createElement('button', 'button task-item__button task-item__button--delete'); //delete button
+  const deleteButtonImg = createElement('img', 'task-item__icon'); //delete button image
 
   //Each elements, needs appending
-  checkBox.className = 'task-item__checkbox';
   checkBox.type = 'checkbox';
   editInput.type = 'text';
-  editInput.className = 'task-item__input';
 
-  editButton.innerText = 'Edit'; //innerText encodes special characters, HTML does not.
-  editButton.className = 'button task-item__button task-item__button--edit';
   editButton.setAttribute('type', 'button');
-
-  deleteButton.className = 'button task-item__button task-item__button--delete';
-  deleteButtonImg.className = 'task-item__icon';
   deleteButtonImg.src = './remove.svg';
   deleteButton.setAttribute('type', 'button');
   deleteButton.appendChild(deleteButtonImg);

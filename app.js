@@ -14,20 +14,20 @@ var completedTasksHolder = document.getElementById('completed-tasks'); //complet
 
 //New task list item
 var createNewTaskElement = function (taskString) {
-  var listItem = document.createElement('li');
+  const listItem = document.createElement('li');
 
   //input (checkbox)
-  var checkBox = document.createElement('input'); //checkbx
+  const checkBox = document.createElement('input'); //checkbx
   //label
-  var label = document.createElement('label'); //label
+  const label = document.createElement('label'); //label
   //input (text)
-  var editInput = document.createElement('input'); //text
+  const editInput = document.createElement('input'); //text
   //button.edit
-  var editButton = document.createElement('button'); //edit button
+  const editButton = document.createElement('button'); //edit button
 
   //button.delete
-  var deleteButton = document.createElement('button'); //delete button
-  var deleteButtonImg = document.createElement('img'); //delete button image
+  const deleteButton = document.createElement('button'); //delete button
+  const deleteButtonImg = document.createElement('img'); //delete button image
 
   listItem.className = 'task-item';
 
@@ -61,7 +61,7 @@ var addTask = function () {
   console.log('Add Task...');
   //Create a new list item with the text from the #new-task:
   if (!taskInput.value) return;
-  var listItem = createNewTaskElement(taskInput.value);
+  const listItem = createNewTaskElement(taskInput.value);
 
   //Append listItem to incompleteTaskHolder
   incompleteTaskHolder.appendChild(listItem);
@@ -76,12 +76,12 @@ var editTask = function () {
   console.log('Edit Task...');
   console.log("Change 'edit' to 'save'");
 
-  var listItem = this.parentNode;
+  const listItem = this.parentNode;
 
-  var editInput = listItem.querySelector('input[type=text]');
-  var label = listItem.querySelector('label');
-  var editBtn = listItem.querySelector('.task-item__button--edit');
-  var containsClass = listItem.classList.contains('task-item--edit-mode');
+  const editInput = listItem.querySelector('input[type=text]');
+  const label = listItem.querySelector('label');
+  const editBtn = listItem.querySelector('.task-item__button--edit');
+  const containsClass = listItem.classList.contains('task-item--edit-mode');
   //If class of the parent is .editmode
   if (containsClass) {
     //switch to .editmode
@@ -101,8 +101,8 @@ var editTask = function () {
 var deleteTask = function () {
   console.log('Delete Task...');
 
-  var listItem = this.parentNode;
-  var ul = listItem.parentNode;
+  const listItem = this.parentNode;
+  const ul = listItem.parentNode;
   //Remove the parent list item from the ul.
   ul.removeChild(listItem);
 };
@@ -112,7 +112,7 @@ var taskCompleted = function () {
   console.log('Complete Task...');
 
   //Append the task list item to the #completed-tasks
-  var listItem = this.parentNode;
+  const listItem = this.parentNode;
   completedTasksHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskIncomplete);
 };
@@ -122,7 +122,7 @@ var taskIncomplete = function () {
   //Mark task as incomplete.
   //When the checkbox is unchecked
   //Append the task list item to the #incompleteTasks.
-  var listItem = this.parentNode;
+  const listItem = this.parentNode;
   incompleteTaskHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
 };
@@ -141,9 +141,9 @@ addButton.addEventListener('click', ajaxRequest);
 var bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
   console.log('bind list item events');
   //select ListItems children
-  var checkBox = taskListItem.querySelector('input[type=checkbox]');
-  var editButton = taskListItem.querySelector('.task-item__button--edit');
-  var deleteButton = taskListItem.querySelector('.task-item__button--delete');
+  const checkBox = taskListItem.querySelector('input[type=checkbox]');
+  const editButton = taskListItem.querySelector('.task-item__button--edit');
+  const deleteButton = taskListItem.querySelector('.task-item__button--delete');
 
   //Bind editTask to edit button.
   editButton.onclick = editTask;

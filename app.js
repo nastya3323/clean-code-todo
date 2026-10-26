@@ -42,10 +42,12 @@ const createNewTaskElement = function (taskString) {
 
   editButton.innerText = 'Edit'; //innerText encodes special characters, HTML does not.
   editButton.className = 'button task-item__button task-item__button--edit';
+  editButton.setAttribute('type', 'button');
 
   deleteButton.className = 'button task-item__button task-item__button--delete';
   deleteButtonImg.className = 'task-item__icon';
   deleteButtonImg.src = './remove.svg';
+  deleteButton.setAttribute('type', 'button');
   deleteButton.appendChild(deleteButtonImg);
 
   //and appending.

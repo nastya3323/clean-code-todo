@@ -3,41 +3,47 @@ const addButton = document.querySelector('.add-task-form__button');
 const incompleteTaskList = document.getElementById('incomplete-tasks');
 const completedTaskList = document.getElementById('completed-tasks');
 
-const createElement = function (tag, className, text) {
+const createElement = function ({ tag, className, text, ...attributes }) {
   const element = document.createElement(tag);
 
-  element.className = className;
+  if (className) {
+    element.className = className;
+  }
 
-  if (text) {
+  if (text !== null) {
+    // textContent, not innerHTML: text may come from user input
     element.textContent = text;
   }
+
+  Object.assign(element, attributes);
 
   return element;
 };
 
 const createTaskElement = function (taskText) {
-  const listItem = createElement('li', 'task-item');
+  const listItem = createElement({ tag: 'li', className: 'task-item' });
 
-  const checkbox = createElement('input', 'task-item__checkbox');
-  const taskLabel = createElement('label', 'task-item__label', taskText);
-  const editInput = createElement('input', 'task-item__input');
-  const editButton = createElement('button', 'button task-item__button task-item__button--edit', 'Edit');
-  const deleteButton = createElement('button', 'button task-item__button task-item__button--delete');
-  const deleteIcon = createElement('img', 'task-item__icon');
+  const checkbox = createElement({ tag: 'input', className: 'task-item__checkbox', type: 'checkbox' });
+  const taskLabel = createElement({ tag: 'label', className: 'task-item__label', text: taskText });
+  const editInput = createElement({ tag: 'input', className: 'task-item__input', type: 'text' });
+  const editButton = createElement({
+    tag: 'button',
+    className: 'button task-item__button task-item__button--edit',
+    text: 'Edit',
+    type: 'button',
+  });
+  const deleteButton = createElement({
+    tag: 'button',
+    className: 'button task-item__button task-item__button--delete',
+    type: 'button',
+    'aria-label': 'Delete task',
+  });
+  const deleteIcon = createElement({ tag: 'img', className: 'task-item__icon', src: './remove.svg', alt: '' });
 
-  checkbox.type = 'checkbox';
-  editInput.type = 'text';
-
-  editButton.setAttribute('type', 'button');
-  deleteIcon.src = './remove.svg';
-  deleteButton.setAttribute('type', 'button');
   deleteButton.appendChild(deleteIcon);
 
-  listItem.appendChild(checkbox);
-  listItem.appendChild(taskLabel);
-  listItem.appendChild(editInput);
-  listItem.appendChild(editButton);
-  listItem.appendChild(deleteButton);
+  listItem.append(checkbox, taskLabel, editInput, editButton, deleteButton);
+
   return listItem;
 };
 
